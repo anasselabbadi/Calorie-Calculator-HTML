@@ -1,0 +1,124 @@
+<html>
+    <title>Calorie Calculator Daily Caloric Needs</title>
+    <style>
+        label {
+  display: block;
+  box-shadow: 0.1em 0.1em 0.2em #888;
+  margin: 1em;
+  border-radius: 1ex;
+  padding: 1ex 1em;
+}
+input[type=number] {
+  text-align: right;
+  border: none;
+}
+input {
+  float: right;
+}
+span {
+  font-weight: bold;
+}
+h1,label{font-family: Impact, Charcoal, sans-serif;
+letter-spacing: 1.4px;
+word-spacing: 3.6px;
+color: #6fa4e4;
+font-weight: 700;
+text-decoration: none;
+font-style: normal;
+font-variant: small-caps;
+text-transform: uppercase;}
+#h1{text-shadow: -5px 5px 0px #00e6e6, -10px 10px 0px #01cccc, -15px 15px 0px #00bdbd, 2px 2px 2px rgba(206,45,177,0), 2px 2px 2px rgba(206,45,177,0);
+}
+.container { 
+  height: 200px;
+  position: relative; 
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.dark-mode {
+  background-color: black;
+}
+.btn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #813dbd;
+  background-image: -webkit-linear-gradient(top, #813dbd, #9170eb);
+  background-image: -moz-linear-gradient(top, #813dbd, #9170eb);
+  background-image: -ms-linear-gradient(top, #813dbd, #9170eb);
+  background-image: -o-linear-gradient(top, #813dbd, #9170eb);
+  background-image: linear-gradient(to bottom, #813dbd, #9170eb);
+  text-decoration: none;
+}
+    </style>
+<body>
+    <h1 id="h1">Fill out the form below.</h1>
+    <label>Female:
+      <input id="female" type="radio" name="gender" onchange="calsPerDay()">
+    </label>
+    <label>Male:
+      <input id="male" type="radio" name="gender" onchange="calsPerDay()" checked>
+    </label>
+    <label>Age:
+      <input id="age" type="number" oninput="calsPerDay()" value="50">
+      years
+    </label>
+    <label>Height:
+      <input id="height" type="number" oninput="calsPerDay()" value="70">
+      in inches (12 inches=1 foot)
+    </label>
+    <label>Weight:
+      <input id="weight" type="number" oninput="calsPerDay()" value="225">
+      in pounds
+    </label>
+    <label>
+      Base metabolic rate: <span id="totalCals"></span> kcal per day
+    </label>
+    <div class="container">
+        <div class="center">
+    <button class="btn" onclick="darkmode()">DARK-MODE</button>
+</div>
+</div>
+    <script>function calsPerDay() {
+        function find(id) { return document.getElementById(id) }
+      
+        var age = find("age").value
+        var height = find("height").value * 2.54
+        var weight = find("weight").value / 2.2
+        var result = 0
+        if (find("male").checked) 
+          result = 66.47 + (13.75 * weight) + (5.0 * height - (6.75 * age))
+        else if (find("female").checked)
+          result = 665.09 + (9.56 * weight) + (1.84 * height - (4.67 * age))
+        find("totalCals").innerHTML = Math.round( result )
+      }
+      calsPerDay()
+      function darkmode() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+
+</body>
+</html>
